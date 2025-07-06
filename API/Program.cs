@@ -8,10 +8,12 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>(opt => {
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddCors();
 
 var app = builder.Build();
 
 //Configure the HTTP request pipeline
+app.UseCors(x=>x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:5173","https://localhost:5173"));
 app.MapControllers();
 
 // Create a new scope for the application's services (dependency injection container)
@@ -48,7 +50,6 @@ catch (Exception ex)
     // Also print the error message to the console for immediate visibility
     Console.WriteLine($"An error occurred during migration and seeding the database.: {ex.Message}");
 }
-
 
 app.Run();
 
