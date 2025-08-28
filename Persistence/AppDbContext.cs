@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace Persistence;
 
 public class AppDbContext(DbContextOptions options) : DbContext(options)
